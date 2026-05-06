@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SageStyle PH | Fashion, Beauty & Lifestyle</title>
+  <meta name="description" content="SageStyle PH is a modern fashion destination for women, men, beauty, and lifestyle essentials in the Philippines." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    :root {
+      --sage: #9CAF88;
+      --sage-deep: #8A9A6E;
+      --sage-soft: #D4E0C5;
+      --sage-pale: #EEF3E7;
+      --white: #ffffff;
+      --off: #FAFCF7;
+      --ink: #23301E;
+      --muted: #6C7965;
+      --line: rgba(35, 48, 30, 0.10);
+      --shadow: 0 18px 50px rgba(40, 60, 30, 0.08);
+      --radius: 22px;
+      --radius-sm: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--ink);
+      background: var(--off);
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+
+    .container {
+      width: min(1240px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      background: var(--sage-pale);
+      color: var(--sage-deep);
+      text-align: center;
+      font-size: 0.88rem;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 252, 247, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 0;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: -0.04em;
+      color: var(--sage-deep);
+      white-space: nowrap;
+    }
+    .brand span { color: var(--ink); }
+
+    .search-wrap {
+      position: relative;
+      max-width: 540px;
+      width: 100%;
+      justify-self: center;
+    }
+    .search-wrap i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+    .search-wrap input {
+      width: 100%;
+      height: 48px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      padding: 0 18px 0 46px;
+      color: var(--ink);
+      outline: none;
+      transition: 0.2s ease;
+    }
+    .search-wrap input:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 4px rgba(156, 175, 136, 0.16);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-self: end;
+    }
+    .nav-action {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--white);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+    .nav-action:hover { background: var(--sage-pale); transform: translateY(-1px); }
+    .cart-count {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      min-width: 19px;
+      height: 19px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: var(--sage-deep);
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+    }
+    .hamburger {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--white);
+      cursor: pointer;
+      place-items: center;
+    }
+
+    .menu-bar {
+      border-top: 1px solid var(--line);
+      background: var(--white);
+    }
+    .menu-links {
+      display: flex;
+      gap: 28px;
+      padding: 14px 0;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .menu-links a {
+      color: var(--muted);
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+    .menu-links a:hover { color: var(--sage-deep); }
+
+    .mobile-menu {
+      display: none;
+      border-top: 1px solid var(--line);
+      background: var(--white);
+      padding: 12px 16px 18px;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block;
+      padding: 12px 0;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 28px 0 20px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .hero-copy, .hero-visual {
+      background: var(--white);
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(138, 154, 110, 0.10);
+    }
+    .hero-copy {
+      padding: clamp(28px, 4vw, 54px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--white) 0%, var(--sage-pale) 100%);
+    }
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      background: rgba(156, 175, 136, 0.16);
+      color: var(--sage-deep);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.4rem, 5vw, 4.7rem);
+      line-height: 0.97;
+      letter-spacing: -0.06em;
+    }
+    .hero-copy p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      line-height: 1.78;
+      font-size: 1.04rem;
+      max-width: 620px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+    .btn-primary {
+      background: var(--sage-deep);
+      color: var(--white);
+      box-shadow: 0 12px 28px rgba(138,154,110,.25);
+    }
+    .btn-primary:hover { transform: translateY(-2px); background: #7a8a5f; }
+    .btn-secondary {
+      background: var(--white);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .btn-secondary:hover { background: var(--sage-pale); }
+
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      object-fit: cover;
+    }
+
+    .section {
+      padding: 28px 0 12px;
+    }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      letter-spacing: -0.04em;
+    }
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.7;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .category-card {
+      position: relative;
+      min-height: 280px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(138, 154, 110, 0.10);
+    }
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .category-card:hover img { transform: scale(1.06); }
+    .category-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(9, 18, 6, 0.62), rgba(9, 18, 6, 0.06));
+      display: flex;
+      align-items: end;
+      padding: 22px;
+    }
+    .category-overlay h3 {
+      margin: 0;
+      color: var(--white);
+      font-size: 1.35rem;
+    }
+
+    .carousel-shell {
+      position: relative;
+    }
+    .carousel-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(240px, 280px);
+      gap: 18px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .product-card {
+      scroll-snap-align: start;
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(138, 154, 110, 0.10);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+    .product-image {
+      position: relative;
+      overflow: hidden;
+      background: var(--sage-pale);
+      aspect-ratio: 0.82;
+    }
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.45s ease;
+    }
+    .product-card:hover .product-image img { transform: scale(1.08); }
+    .badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--white);
+      color: var(--sage-deep);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    }
+    .product-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .product-meta {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--sage-deep);
+      font-weight: 700;
+    }
+    .product-name {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.45;
+      min-height: 46px;
+    }
+    .price-wrap {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .price-now {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .price-old {
+      color: var(--muted);
+      text-decoration: line-through;
+      font-size: 0.95rem;
+    }
+    .add-btn {
+      margin-top: auto;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 16px;
+      background: var(--sage-deep);
+      color: var(--white);
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .add-btn:hover { background: #7a8a5f; }
+
+    .carousel-controls {
+      display: flex;
+      gap: 10px;
+    }
+    .carousel-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--ink);
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .carousel-btn:hover { background: var(--sage-pale); }
+
+    .flash-sale {
+      margin-top: 18px;
+      background: linear-gradient(135deg, var(--sage-deep) 0%, var(--sage) 100%);
+      color: var(--white);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .flash-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 26px;
+    }
+    .flash-sale h3 {
+      margin: 0 0 8px;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      letter-spacing: -0.04em;
+    }
+    .flash-sale p {
+      margin: 0;
+      color: rgba(255,255,255,0.88);
+      max-width: 720px;
+      line-height: 1.7;
+    }
+
+    .brands {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+    }
+    .brand-pill {
+      background: var(--white);
+      border: 1px solid rgba(138, 154, 110, 0.12);
+      border-radius: 18px;
+      min-height: 84px;
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+      color: var(--sage-deep);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .newsletter {
+      background: var(--white);
+      border: 1px solid rgba(138,154,110,.12);
+      box-shadow: var(--shadow);
+      border-radius: 30px;
+      padding: clamp(24px, 4vw, 42px);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      margin-top: 18px;
+    }
+    .newsletter p { color: var(--muted); line-height: 1.7; margin: 8px 0 0; }
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+      width: min(100%, 480px);
+    }
+    .newsletter-form input {
+      flex: 1;
+      min-width: 0;
+      height: 50px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      padding: 0 18px;
+      outline: none;
+    }
+    .newsletter-form input:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 4px rgba(156,175,136,.16);
+    }
+
+    footer {
+      margin-top: 44px;
+      background: #eef3e7;
+      border-top: 1px solid rgba(138,154,110,.16);
+    }
+    .footer-top {
+      padding: 40px 0 26px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr 1fr;
+      gap: 22px;
+    }
+    .footer-col h4 {
+      margin: 0 0 14px;
+      font-size: 1rem;
+    }
+    .footer-col a, .footer-col p {
+      display: block;
+      margin: 0 0 10px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.94rem;
+    }
+    .footer-col a:hover { color: var(--sage-deep); }
+
+    .payment-row, .social-row, .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .pay-pill, .trust-pill {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--white);
+      border: 1px solid rgba(138,154,110,.14);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--white);
+      border: 1px solid rgba(138,154,110,.14);
+      color: var(--sage-deep);
+      transition: 0.2s ease;
+    }
+    .social-link:hover { background: var(--sage-deep); color: var(--white); }
+
+    .credit-line {
+      margin-top: 10px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--sage), var(--sage-soft));
+      color: var(--ink);
+      font-weight: 800;
+      line-height: 1.6;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(138,154,110,.12);
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(138,154,110,.16);
+      padding: 18px 0 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .categories { grid-template-columns: repeat(2, 1fr); }
+      .brands { grid-template-columns: repeat(3, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .nav-inner {
+        grid-template-columns: auto auto auto;
+      }
+      .search-wrap {
+        grid-column: 1 / -1;
+        order: 3;
+        max-width: 100%;
+      }
+      .hero-grid,
+      .newsletter,
+      .flash-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-visual img { min-height: 360px; }
+      .newsletter-form { width: 100%; }
+    }
+    @media (max-width: 720px) {
+      .container { width: min(100% - 24px, 1240px); }
+      .menu-bar { display: none; }
+      .hamburger { display: grid; }
+      .categories,
+      .brands,
+      .footer-top { grid-template-columns: 1fr; }
+      .hero-copy, .hero-visual, .newsletter, .flash-sale { border-radius: 24px; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-form .btn-primary { width: 100%; }
+      .nav-actions .nav-action.account { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">Free shipping across Metro Manila on orders over ₱2,500 • 100% authentic products • COD available</div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">Sage<span>Style</span> PH</div>
+
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search for dresses, sneakers, beauty & more" />
+      </div>
+
+      <div class="nav-actions">
+        <button class="hamburger" id="menuToggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+        <a href="#" class="nav-action account" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+        <a href="#" class="nav-action" aria-label="Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="menu-bar">
+      <div class="container menu-links">
+        <a href="#women">Women</a>
+        <a href="#men">Men</a>
+        <a href="#beauty">Beauty</a>
+        <a href="#lifestyle">Lifestyle</a>
+        <a href="#new-arrivals">New Arrivals</a>
+        <a href="#flash-sale">Flash Sale</a>
+        <a href="#newsletter">Newsletter</a>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#women">Women</a>
+      <a href="#men">Men</a>
+      <a href="#beauty">Beauty</a>
+      <a href="#lifestyle">Lifestyle</a>
+      <a href="#new-arrivals">New Arrivals</a>
+      <a href="#flash-sale">Flash Sale</a>
+      <a href="#newsletter">Newsletter</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy fade-up">
+          <div class="eyebrow">New season • curated fashion edit</div>
+          <h1>Fashion that feels fresh, effortless, and elevated.</h1>
+          <p>Shop a modern Philippine fashion destination inspired by the smooth browsing flow of top fashion marketplaces—now reimagined with a soft sage green aesthetic, premium product curation, and a clean conversion-focused layout.</p>
+          <div class="hero-actions">
+            <a href="#new-arrivals" class="btn btn-primary">Shop New Arrivals</a>
+            <a href="#women" class="btn btn-secondary">Explore Categories</a>
+          </div>
+        </div>
+        <div class="hero-visual fade-up">
+          <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80" alt="Fashion campaign hero image" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="women">
+      <div class="container">
+        <div class="section-head fade-up">
+          <div>
+            <h2>Featured categories</h2>
+            <p>Browse women’s, men’s, beauty, and lifestyle edits curated with premium visuals, realistic local pricing, and a smooth shopping experience.</p>
+          </div>
+        </div>
+
+        <div class="categories">
+          <a class="category-card fade-up" href="#new-arrivals">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80" alt="Women fashion category" />
+            <div class="category-overlay"><h3>Women</h3></div>
+          </a>
+          <a class="category-card fade-up" id="men" href="#new-arrivals">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Men fashion category" />
+            <div class="category-overlay"><h3>Men</h3></div>
+          </a>
+          <a class="category-card fade-up" id="beauty" href="#new-arrivals">
+            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80" alt="Beauty category" />
+            <div class="category-overlay"><h3>Beauty</h3></div>
+          </a>
+          <a class="category-card fade-up" id="lifestyle" href="#new-arrivals">
+            <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=900&q=80" alt="Lifestyle category" />
+            <div class="category-overlay"><h3>Lifestyle</h3></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="new-arrivals">
+      <div class="container">
+        <div class="section-head fade-up">
+          <div>
+            <h2>Trending & new arrivals</h2>
+            <p>Realistic market-ready products with Philippine peso pricing, markdowns, and category coverage across fashion, beauty, and lifestyle.</p>
+          </div>
+          <div class="carousel-controls">
+            <button class="carousel-btn" id="prevBtn" aria-label="Scroll left"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="carousel-btn" id="nextBtn" aria-label="Scroll right"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <div class="carousel-shell fade-up">
+          <div class="carousel-track" id="productCarousel">
+            <article class="product-card">
+              <div class="product-image"><span class="badge">Women</span><img src="https://images.unsplash.com/photo-1495385794356-15371f348c31?auto=format&fit=crop&w=900&q=80" alt="Linen midi dress" /></div>
+              <div class="product-body">
+                <div class="product-meta">Women</div>
+                <h3 class="product-name">Linen Belted Midi Dress</h3>
+                <div class="price-wrap"><span class="price-now">₱1,899</span><span class="price-old">₱2,499</span></div>
+                <button class="add-btn">Add to Bag</button>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image"><span class="badge">Women</span><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Tailored blazer" /></div>
+              <div class="product-body">
+                <div class="product-meta">Women</div>
+                <h3 class="product-name">Tailored Sage Blazer</h3>
+                <div class="price-wrap"><span class="price-now">₱2,750</span><span class="price-old">₱3,499</span></div>
+                <button class="add-btn">Add to Bag</button>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image"><span class="badge">Men</span><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="Oxford shirt" /></div>
+              <div class="product-body">
+                <div class="product-meta">Men</div>
+                <h3 class="product-name">Relaxed Oxford Shirt</h3>
+                <div class="price-wrap"><span class="price-now">₱1,299</span><span class="price-old">₱1,699</span></div>
+                <button class="add-btn">Add to Bag</button>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image"><span class="badge">Men</span><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80" alt="Leather sneakers" /></div>
+              <div class="product-body">
+                <div class="product-meta">Men</div>
+                <h3 class="product-name">Leather Street Sneakers</h3>
+                <div class="price-wrap"><span class="price-now">₱2,450</span><span class="price-old">₱3,200</span></div>
+                <button class="add-btn">Add to Bag</button>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image"><span class="badge">Beauty</span><img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=900&q=80" alt="Beauty serum" /></div>
+              <div class="product-body">
+                <div class="product-meta">Beauty</div>
+                <h3 class="product-name">Hydrating Glow Serum</h3>
+                <div class="price-wrap"><span class="price-now">₱599</span><span class="price-old">₱799</span></div>
+                <button class="add-btn">Add to Bag</button>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image"><span class="badge">Beauty</span><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=80" alt="Lip set" /></div>
+              <div class="product-body">
+                <div class="product-meta">Beauty</div>
+                <h3 class="product-name">Soft Matte Lip Set</h3>
+                <div class="price-wrap"><span class="price-now">₱749</span><span class="price-old">₱999</span></div>
+                <button class="add-btn">Add to Bag</button>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image"><span class="badge">Lifestyle</span><img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=900&q=80" alt="Tote bag" /></div>
+              <div class="product-body">
+                <div class="product-meta">Lifestyle</div>
+                <h3 class="product-name">Minimal Canvas Tote Bag</h3>
+                <div class="price-wrap"><span class="price-now">₱1,099</span><span class="price-old">₱1,399</span></div>
+                <button class="add-btn">Add to Bag</button>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image"><span class="badge">Lifestyle</span><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80" alt="Watch" /></div>
+              <div class="product-body">
+                <div class="product-meta">Lifestyle</div>
+                <h3 class="product-name">Everyday Stainless Watch</h3>
+                <div class="price-wrap"><span class="price-now">₱2,999</span><span class="price-old">₱3,799</span></div>
+                <button class="add-btn">Add to Bag</button>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image"><span class="badge">Women</span><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=80" alt="Heels" /></div>
+              <div class="product-body">
+                <div class="product-meta">Women</div>
+                <h3 class="product-name">Strappy Occasion Heels</h3>
+                <div class="price-wrap"><span class="price-now">₱1,699</span><span class="price-old">₱2,199</span></div>
+                <button class="add-btn">Add to Bag</button>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image"><span class="badge">Men</span><img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=900&q=80" alt="Chino pants" /></div>
+              <div class="product-body">
+                <div class="product-meta">Men</div>
+                <h3 class="product-name">Weekend Chino Trousers</h3>
+                <div class="price-wrap"><span class="price-now">₱1,450</span><span class="price-old">₱1,850</span></div>
+                <button class="add-btn">Add to Bag</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="flash-sale">
+      <div class="container">
+        <div class="flash-sale fade-up">
+          <div class="flash-grid">
+            <div>
+              <h3>Flash Sale: Extra 15% off selected styles</h3>
+              <p>Use code <strong>SAGE15</strong> on featured fashion, beauty, and lifestyle pieces. Limited-time offer for early shoppers only.</p>
+            </div>
+            <div>
+              <a href="#new-arrivals" class="btn btn-secondary" style="background: rgba(255,255,255,.18); color: #fff; border-color: rgba(255,255,255,.22);">Shop the Promo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head fade-up">
+          <div>
+            <h2>Shop your favorite brands</h2>
+            <p>A premium multi-brand visual strip designed to mimic a real marketplace browsing experience.</p>
+          </div>
+        </div>
+        <div class="brands">
+          <div class="brand-pill fade-up">Nike</div>
+          <div class="brand-pill fade-up">adidas</div>
+          <div class="brand-pill fade-up">Levi’s</div>
+          <div class="brand-pill fade-up">New Balance</div>
+          <div class="brand-pill fade-up">Maybelline</div>
+          <div class="brand-pill fade-up">Charles & Keith</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="newsletter">
+      <div class="container">
+        <div class="newsletter fade-up">
+          <div>
+            <h2 style="margin:0; font-size: clamp(1.6rem, 3vw, 2.3rem); letter-spacing:-0.04em;">Get first access to drops, promos, and style edits</h2>
+            <p>Sign up for exclusive sale alerts, weekly fashion picks, and early access to new arrivals.</p>
+          </div>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email address" />
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-top">
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <a href="#">Help Center</a>
+        <a href="#">Shipping & Delivery</a>
+        <a href="#">Returns & Refunds</a>
+        <a href="#">Order Tracking</a>
+        <a href="#">Size Guide</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>About Us</h4>
+        <a href="#">About the Company</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+        <a href="#">Affiliate Program</a>
+      </div>
+      <div class="footer-col">
+        <h4>Payments & Trust</h4>
+        <div class="payment-row">
+          <span class="pay-pill"><i class="fa-brands fa-cc-visa"></i> Visa</span>
+          <span class="pay-pill"><i class="fa-brands fa-cc-mastercard"></i> Mastercard</span>
+          <span class="pay-pill">GCash</span>
+          <span class="pay-pill">PayMaya</span>
+          <span class="pay-pill">COD</span>
+        </div>
+        <div class="trust-row">
+          <span class="trust-pill"><i class="fa-solid fa-shield-halved"></i> Secure Checkout</span>
+          <span class="trust-pill"><i class="fa-solid fa-certificate"></i> Trusted Store</span>
+          <span class="trust-pill"><i class="fa-solid fa-truck-fast"></i> Fast Delivery</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="social-row">
+          <a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-link" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#" class="social-link" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+        <div class="credit-line">Engineered and developed by the Overall Technical Operator Engineer Manager of Media Master Marketing, a company owned by Rory Restle.</div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div>© 2026 SageStyle PH. All Rights Reserved.</div>
+      <div>Fashion • Beauty • Lifestyle • Philippines</div>
+    </div>
+  </footer>
+
+  <script>
+    const cartCount = document.getElementById('cartCount');
+    let cart = 0;
+    document.querySelectorAll('.add-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        cart += 1;
+        cartCount.textContent = cart;
+        btn.textContent = 'Added';
+        btn.style.background = '#7a8a5f';
+        setTimeout(() => {
+          btn.textContent = 'Add to Bag';
+          btn.style.background = '';
+        }, 1000);
+      });
+    });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle?.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+    const carousel = document.getElementById('productCarousel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const scrollAmount = 320;
+    prevBtn?.addEventListener('click', () => carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
+    nextBtn?.addEventListener('click', () => carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
